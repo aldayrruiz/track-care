@@ -1,7 +1,8 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Post, Request, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { ApiTags } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
-import { CreateAuthDto } from './dto/create-auth.dto';
+import { RegisterDto } from './dto/register.dto';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -9,12 +10,13 @@ export class AuthController {
 	constructor(private readonly authService: AuthService) {}
 
 	@Post('register')
-	create(@Body() createAuthDto: CreateAuthDto) {
-		return this.authService.create(createAuthDto);
+	register(@Body() registerDto: RegisterDto) {
+		return this.authService.register(registerDto);
 	}
 
-	@Get('login')
-	findAll() {
-		return this.authService.findAll();
+	@UseGuards(AuthGuard('local'))
+	@Post('login')
+	login(@Request() req: any) {
+		return req.user;
 	}
 }

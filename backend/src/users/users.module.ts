@@ -10,5 +10,6 @@ const UserMongoose = MongooseModule.forFeature([{ name: User.name, schema: UserS
 	imports: [UserMongoose],
 	controllers: [UsersController],
 	providers: [UsersService],
+	exports: [UsersService],
 })
 export class UsersModule {}
