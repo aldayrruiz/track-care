@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  nestjs:
+    image: node:16.19.1
+    working_dir: /app
+    volumes:
+      - .:/app
+    environment:
+      MONGODB_URI: mongodb://mongodb:27017/nestjs
+      JWT_ACCESS_SECRET: your_access_secret
+      JWT_REFRESH_SECRET: your_refresh_secret
+    ports:
+      - 3000:3000
+    command: npm run start:prod
+
+  mongodb:
+    image: mongo
+    volumes:
+      - mongodb_data:/data/db
+
+volumes:
+  mongodb_data:

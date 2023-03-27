@@ -4,11 +4,11 @@ import { MongooseModuleOptions, MongooseOptionsFactory } from '@nestjs/mongoose'
 
 @Injectable()
 export class MongooseConfigService implements MongooseOptionsFactory {
-	constructor(private configService: ConfigService) {}
+  constructor(private configService: ConfigService) {}
 
-	createMongooseOptions(): MongooseModuleOptions {
-		return {
-			uri: this.configService.get<string>('MONGODB_URI'),
-		};
-	}
+  createMongooseOptions(): MongooseModuleOptions {
+    return {
+      uri: this.configService.get<string>('MONGODB_URI'),
+    };
+  }
 }

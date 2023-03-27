@@ -3,7 +3,7 @@ import { SmartwatchesController } from './smartwatches.controller';
 import { SmartwatchesService } from './smartwatches.service';
 
 @Module({
-	controllers: [SmartwatchesController],
-	providers: [SmartwatchesService],
+  controllers: [SmartwatchesController],
+  providers: [SmartwatchesService],
 })
 export class SmartwatchesModule {}
