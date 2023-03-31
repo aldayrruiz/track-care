@@ -7,30 +7,30 @@ import { SmartwatchesService } from './smartwatches.service';
 @ApiTags('smartwatches')
 @Controller('smartwatches')
 export class SmartwatchesController {
-  constructor(private readonly smartwatchesService: SmartwatchesService) {}
+	constructor(private readonly smartwatchesService: SmartwatchesService) {}
 
-  @Post()
-  create(@Body() createSmartwatchDto: CreateSmartwatchDto) {
-    return this.smartwatchesService.create(createSmartwatchDto);
-  }
+	@Post()
+	create(@Body() createSmartwatchDto: CreateSmartwatchDto) {
+		return this.smartwatchesService.create(createSmartwatchDto);
+	}
 
-  @Get()
-  findAll() {
-    return this.smartwatchesService.findAll();
-  }
+	@Get()
+	findAll() {
+		return this.smartwatchesService.findAll();
+	}
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.smartwatchesService.findOne(+id);
-  }
+	@Get(':id')
+	findOne(@Param('id') id: string) {
+		return this.smartwatchesService.findById(id);
+	}
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateSmartwatchDto: UpdateSmartwatchDto) {
-    return this.smartwatchesService.update(+id, updateSmartwatchDto);
-  }
+	@Patch(':id')
+	update(@Param('id') id: string, @Body() updateSmartwatchDto: UpdateSmartwatchDto) {
+		return this.smartwatchesService.update(id, updateSmartwatchDto);
+	}
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.smartwatchesService.remove(+id);
-  }
+	@Delete(':id')
+	remove(@Param('id') id: string) {
+		return this.smartwatchesService.remove(id);
+	}
 }

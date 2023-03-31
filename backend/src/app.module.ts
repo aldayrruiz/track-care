@@ -9,15 +9,15 @@ import { SmartwatchesModule } from './smartwatches/smartwatches.module';
 import { UsersModule } from './users/users.module';
 
 @Module({
-  imports: [
-    ConfigModule.forRoot({ isGlobal: true }),
-    MongooseModule.forRootAsync({ useClass: MongooseConfigService }),
-    AuthModule,
-    UsersModule,
-    SmartwatchesModule,
-    PositionsModule,
-  ],
-  controllers: [AppController],
-  providers: [],
+	imports: [
+		ConfigModule.forRoot({ isGlobal: true }),
+		MongooseModule.forRootAsync({ useClass: MongooseConfigService }),
+		AuthModule,
+		UsersModule,
+		SmartwatchesModule,
+		PositionsModule,
+	],
+	controllers: [AppController],
+	providers: [],
 })
 export class AppModule {}

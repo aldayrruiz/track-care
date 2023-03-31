@@ -1,38 +1,39 @@
 import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { Request } from 'express';
-import { AuthDto } from './dto/auth.dto';
+import { SkipAuth } from './constants';
+import { SignInDto } from './dto/sign-in.dto';
 import { SignUpDto } from './dto/sign-up.dto';
 import { JwtRefreshGuard } from './guards/jwt-refresh.guard';
-import { JwtGuard } from './guards/jwt.guard';
 import { AuthService } from './services/auth.service';
 
 @ApiTags('auth')
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+	constructor(private readonly authService: AuthService) {}
 
-  @Post('signUp')
-  signUp(@Body() signUpDto: SignUpDto) {
-    return this.authService.signUp(signUpDto);
-  }
+	@SkipAuth()
+	@Post('signUp')
+	signUp(@Body() signUpDto: SignUpDto) {
+		return this.authService.signUp(signUpDto);
+	}
 
-  @Post('signIn')
-  signIn(@Body() data: AuthDto) {
-    return this.authService.signIn(data);
-  }
+	@SkipAuth()
+	@Post('signIn')
+	signIn(@Body() data: SignInDto) {
+		return this.authService.signIn(data);
+	}
 
-  @UseGuards(JwtGuard)
-  @Get('logOut')
-  logout(@Req() req: Request) {
-    this.authService.logout(req.user['sub']);
-  }
+	@Get('logOut')
+	logout(@Req() req: Request) {
+		this.authService.logout(req.user['sub']);
+	}
 
-  @UseGuards(JwtRefreshGuard)
-  @Get('refresh')
-  refreshTokens(@Req() req: Request) {
-    const userId = req.user['sub'];
-    const refreshToken = req.user['refreshToken'];
-    return this.authService.refreshTokens(userId, refreshToken);
-  }
+	@UseGuards(JwtRefreshGuard)
+	@Get('refresh')
+	refreshTokens(@Req() req: Request) {
+		const userId = req.user['sub'];
+		const refreshToken = req.user['refreshToken'];
+		return this.authService.refreshTokens(userId, refreshToken);
+	}
 }

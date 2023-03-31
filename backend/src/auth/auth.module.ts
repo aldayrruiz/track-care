@@ -12,18 +12,18 @@ import { LocalStrategy } from './strategies/local.strategy';
 import { JwtRefreshStrategy } from './strategies/refresh-token.strategy';
 
 @Module({
-  imports: [UsersModule, PassportModule, JwtModule.register({})],
-  controllers: [AuthController],
-  providers: [
-    AuthService,
-    HashingService,
-    LocalStrategy,
-    JwtAccessStrategy,
-    JwtRefreshStrategy,
-    {
-      provide: APP_GUARD,
-      useClass: JwtGuard,
-    },
-  ],
+	imports: [UsersModule, PassportModule, JwtModule.register({})],
+	controllers: [AuthController],
+	providers: [
+		AuthService,
+		HashingService,
+		LocalStrategy,
+		JwtAccessStrategy,
+		JwtRefreshStrategy,
+		{
+			provide: APP_GUARD,
+			useClass: JwtGuard,
+		},
+	],
 })
 export class AuthModule {}

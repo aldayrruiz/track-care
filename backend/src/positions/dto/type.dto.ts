@@ -1,0 +1,5 @@
+export enum PositionType {
+	MONITORING = 'MONITORING',
+	TAKEOUT = 'TAKEOUT',
+	EMERGENCY = 'EMERGENCY',
+}

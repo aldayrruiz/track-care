@@ -1,17 +1,29 @@
 import { ApiHideProperty } from '@nestjs/swagger';
-import { IsEmail, IsNotEmpty, IsString, IsStrongPassword } from 'class-validator';
+import {
+	IsEmail,
+	IsEnum,
+	IsNotEmpty,
+	IsOptional,
+	IsString,
+	IsStrongPassword,
+} from 'class-validator';
+import { UserRole } from 'src/users/dto/role.dto';
 
 export class SignUpDto {
-  @IsString()
-  @IsNotEmpty()
-  name: string;
+	@IsString()
+	@IsNotEmpty()
+	name: string;
 
-  @IsEmail()
-  email: string;
+	@IsEmail()
+	email: string;
 
-  @IsStrongPassword()
-  password: string;
+	@IsStrongPassword()
+	password: string;
 
-  @ApiHideProperty()
-  readonly refreshToken?: string;
+	@IsEnum(UserRole)
+	@IsOptional()
+	role?: UserRole;
+
+	@ApiHideProperty()
+	readonly refreshToken?: string;
 }

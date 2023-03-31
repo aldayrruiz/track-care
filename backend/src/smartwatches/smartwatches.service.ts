@@ -1,26 +1,32 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 import { CreateSmartwatchDto } from './dto/create-smartwatch.dto';
 import { UpdateSmartwatchDto } from './dto/update-smartwatch.dto';
+import { Smartwatch, SmartwatchDocument } from './schemas/smartwatch.schema';
 
 @Injectable()
 export class SmartwatchesService {
-  create(createSmartwatchDto: CreateSmartwatchDto) {
-    return 'This action adds a new smartwatch';
-  }
+	constructor(@InjectModel(Smartwatch.name) private smartwatchModel: Model<SmartwatchDocument>) {}
 
-  findAll() {
-    return `This action returns all smartwatches`;
-  }
+	async create(smartwatchDto: CreateSmartwatchDto): Promise<SmartwatchDocument> {
+		const createdSmartwatch = new this.smartwatchModel(smartwatchDto);
+		return createdSmartwatch.save();
+	}
 
-  findOne(id: number) {
-    return `This action returns a #${id} smartwatch`;
-  }
+	async findAll(): Promise<SmartwatchDocument[]> {
+		return this.smartwatchModel.find().exec();
+	}
 
-  update(id: number, updateSmartwatchDto: UpdateSmartwatchDto) {
-    return `This action updates a #${id} smartwatch`;
-  }
+	async findById(id: string): Promise<SmartwatchDocument> {
+		return this.smartwatchModel.findById(id).exec();
+	}
 
-  remove(id: number) {
-    return `This action removes a #${id} smartwatch`;
-  }
+	async update(id: string, updateSmartwatchDto: UpdateSmartwatchDto): Promise<SmartwatchDocument> {
+		return this.smartwatchModel.findByIdAndUpdate(id, updateSmartwatchDto).exec();
+	}
+
+	async remove(id: string): Promise<SmartwatchDocument> {
+		return this.smartwatchModel.findByIdAndRemove(id).exec();
+	}
 }

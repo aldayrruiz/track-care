@@ -1,16 +1,20 @@
-import { IsEmail, IsNotEmpty, IsString, IsStrongPassword } from 'class-validator';
+import { IsEmail, IsEnum, IsNotEmpty, IsString, IsStrongPassword } from 'class-validator';
+import { UserRole } from './role.dto';
 
 export class CreateUserDto {
-  @IsString()
-  @IsNotEmpty()
-  name: string;
+	@IsString()
+	@IsNotEmpty()
+	name: string;
 
-  @IsEmail()
-  email: string;
+	@IsEmail()
+	email: string;
 
-  @IsStrongPassword()
-  password: string;
+	@IsStrongPassword()
+	password: string;
 
-  @IsString()
-  refreshToken: string;
+	@IsString()
+	refreshToken: string;
+
+	@IsEnum(UserRole)
+	role?: UserRole;
 }
