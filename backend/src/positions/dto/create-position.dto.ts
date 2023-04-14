@@ -1,4 +1,14 @@
-import { IsDateString, IsEnum, IsMongoId, IsNumber } from 'class-validator';
+import { ApiHideProperty } from '@nestjs/swagger';
+import { Exclude } from 'class-transformer';
+import {
+	IsDateString,
+	IsEnum,
+	IsLatitude,
+	IsLongitude,
+	IsMACAddress,
+	IsNotEmpty,
+	IsNumber,
+} from 'class-validator';
 import { SourcePosition } from './source.dto';
 import { PositionType } from './type.dto';
 
@@ -6,10 +16,16 @@ export class CreatePositionDto {
 	@IsEnum(PositionType)
 	type: PositionType;
 
+	@IsNotEmpty()
+	@IsMACAddress()
+	MAC: string;
+
 	@IsNumber()
+	@IsLatitude()
 	latitude: number;
 
 	@IsNumber()
+	@IsLongitude()
 	longitude: number;
 
 	@IsNumber()
@@ -18,15 +34,16 @@ export class CreatePositionDto {
 	@IsNumber()
 	accuracy: number;
 
-	@IsEnum(SourcePosition)
-	source: SourcePosition;
-
 	@IsNumber()
 	battery: number;
 
-	@IsDateString()
-	timestamp: string;
+	@IsEnum(SourcePosition)
+	source: SourcePosition;
 
-	@IsMongoId()
-	owner: string;
+	@IsDateString()
+	deviceTimestamp: string;
+
+	@Exclude()
+	@ApiHideProperty()
+	serverTimestamp: string;
 }

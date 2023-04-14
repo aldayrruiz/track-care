@@ -1,0 +1,57 @@
+<div class="main-div">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title> Nuevo usuario </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="formGroup">
+        <table cellspacing="0">
+          <!-- Full name -->
+          <tr>
+            <td>
+              <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Dirección MAC</mat-label>
+                <input type="text" matInput formControlName="MAC" placeholder="30:65:EC:6F:C4:58" />
+                <mat-error *ngIf="MAC?.hasError('required')">
+                  Una dirección MAC es <strong>obligatoria</strong>
+                </mat-error>
+                <!-- Mat error for MAC Pattern -->
+                <mat-error *ngIf="MAC?.hasError('pattern')">
+                  La dirección MAC no es válida. Debe tener el formato 00:00:00:00:00:00
+                </mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+
+          <!-- Button - Create Smartwatch -->
+          <tr>
+            <td>
+              <div>
+                <button
+                  class="cancel"
+                  mat-raised-button
+                  color="warn"
+                  routerLink=".."
+                  [disabled]="sending"
+                >
+                  Cancelar
+                </button>
+                <button
+                  class="create"
+                  (click)="createSmartwatch()"
+                  mat-raised-button
+                  color="primary"
+                  type="submit"
+                  expand="block"
+                  [disabled]="!formGroup.valid || sending"
+                >
+                  Crear
+                </button>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

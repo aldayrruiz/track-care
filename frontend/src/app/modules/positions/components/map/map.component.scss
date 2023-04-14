@@ -1,0 +1,58 @@
+.map {
+  border: 2px solid black;
+  position: absolute;
+  margin-top: 1rem;
+  margin-left: 1rem;
+  margin-right: 0.5rem;
+  margin-bottom: 1rem;
+  top: 60px;
+  right: 30%;
+  bottom: 0px;
+  left: 0px;
+}
+
+.vehicles-container {
+  position: absolute;
+  top: 60px;
+  right: 0px;
+  bottom: 0px;
+  left: 70%;
+}
+
+.scroll-bar {
+  margin-top: 15px;
+  width: 100%;
+  height: 98%;
+}
+
+mat-card {
+  margin: 0px 10px 10px 10px;
+  cursor: pointer;
+}
+
+.title {
+  background-color: grey;
+  border-radius: 10px;
+  border-width: 1px;
+  color: white;
+  text-align: center;
+}
+
+#first {
+  width: 240px;
+}
+
+#second {
+  text-align: right;
+  padding-right: 100px;
+}
+
+.aligned-with-icon {
+  position: absolute;
+  margin-top: 5px;
+  margin-left: 5px; /* optional */
+}
+
+.disabled {
+  opacity: 0.5;
+}

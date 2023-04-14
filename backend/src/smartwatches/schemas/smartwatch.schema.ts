@@ -1,18 +1,14 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import mongoose, { HydratedDocument } from 'mongoose';
-import { User } from 'src/users/schemas/user.schema';
+import { HydratedDocument } from 'mongoose';
 
 export type SmartwatchDocument = HydratedDocument<Smartwatch>;
 
 @Schema()
 export class Smartwatch {
-	@Prop({ required: true })
-	MACAdress: string;
+	@Prop({ required: true, unique: true })
+	MAC: string;
 
-	@Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Owner' })
-	owner: User;
-
-	@Prop({ default: Date.now })
+	@Prop({ default: new Date().toJSON() })
 	createdAt: Date;
 }
 

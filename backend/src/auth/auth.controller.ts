@@ -29,6 +29,7 @@ export class AuthController {
 		this.authService.logout(req.user['sub']);
 	}
 
+	@SkipAuth()
 	@UseGuards(JwtRefreshGuard)
 	@Get('refresh')
 	refreshTokens(@Req() req: Request) {

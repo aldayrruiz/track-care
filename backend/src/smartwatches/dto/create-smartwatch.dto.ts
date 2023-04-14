@@ -1,9 +1,6 @@
-import { IsMACAddress, IsMongoId } from 'class-validator';
+import { IsMACAddress } from 'class-validator';
 
 export class CreateSmartwatchDto {
-	@IsMongoId()
-	owner: string;
-
-	@IsMACAddress()
-	MACAddress: string;
+	@IsMACAddress({ no_colons: false })
+	MAC: string;
 }

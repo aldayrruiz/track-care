@@ -22,6 +22,10 @@ export class SmartwatchesService {
 		return this.smartwatchModel.findById(id).exec();
 	}
 
+	async findByMAC(MAC: string): Promise<SmartwatchDocument> {
+		return this.smartwatchModel.findOne({ MAC }).exec();
+	}
+
 	async update(id: string, updateSmartwatchDto: UpdateSmartwatchDto): Promise<SmartwatchDocument> {
 		return this.smartwatchModel.findByIdAndUpdate(id, updateSmartwatchDto).exec();
 	}

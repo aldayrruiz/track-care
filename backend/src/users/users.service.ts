@@ -11,7 +11,8 @@ export class UsersService {
 
 	async create(userDto: SignUpDto): Promise<UserDocument> {
 		const createdUser = new this.userModel(userDto);
-		return createdUser.save();
+		const user = await createdUser.save();
+		return user;
 	}
 
 	async findAll(): Promise<UserDocument[]> {
@@ -24,6 +25,10 @@ export class UsersService {
 
 	async findByEmail(email: string): Promise<UserDocument> {
 		return this.userModel.findOne({ email }).exec();
+	}
+
+	async findBySmartwatchId(smartwatchId: string): Promise<UserDocument> {
+		return this.userModel.findOne({ smartwatch: smartwatchId }).exec();
 	}
 
 	async update(id: string, updateUserDto: UpdateUserDto): Promise<UserDocument> {

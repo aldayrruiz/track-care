@@ -13,13 +13,13 @@ export class JwtAccessStrategy extends PassportStrategy(Strategy, 'jwt') {
 	constructor(private configService: ConfigService) {
 		super({
 			jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-
 			secretOrKey: configService.get<string>('JWT_ACCESS_SECRET'),
 			ignoreExpiration: false,
 		});
 	}
 
 	async validate(payload: JwtPayload) {
+		console.log('JWT Access');
 		return payload;
 	}
 }

@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
+import mongoose, { HydratedDocument } from 'mongoose';
+import { Smartwatch } from 'src/smartwatches/schemas/smartwatch.schema';
 import { UserRole } from '../dto/role.dto';
 
 export type UserDocument = HydratedDocument<User>;
@@ -12,16 +13,22 @@ export class User {
 	@Prop({ unique: true, required: true })
 	email: string;
 
-	@Prop({ required: true })
-	password: string;
+	@Prop({ required: false })
+	password?: string;
 
 	@Prop()
 	refreshToken: string;
 
-	@Prop({ enum: UserRole, default: UserRole })
+	@Prop({ enum: UserRole, default: UserRole.USER })
 	role?: UserRole;
 
-	@Prop({ default: Date.now })
+	@Prop({ default: false })
+	emailReceiver: boolean;
+
+	@Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Smartwatch', unique: true, required: false })
+	smartwatch: Smartwatch;
+
+	@Prop({ default: new Date().toJSON() })
 	createdAt: Date;
 }
 

@@ -1,0 +1,38 @@
+<mat-card class="centered">
+  <mat-card-header>
+    <mat-card-title>Login</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="loginForm">
+      <mat-form-field>
+        <input matInput placeholder="Email" formControlName="email" />
+        <mat-error *ngIf="email?.hasError('email') && !email?.hasError('required')">{{
+          emailErrorMessage
+        }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Password"
+          type="{{ showPassword ? 'text' : 'password' }}"
+          formControlName="password"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="showPassword = !showPassword"
+          [attr.aria-label]="'Toggle password visibility'"
+          [attr.aria-pressed]="showPassword"
+        >
+          <mat-icon>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-checkbox formControlName="rememberEmail">Remember Email</mat-checkbox>
+    </form>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-raised-button color="primary" [disabled]="!loginForm.valid" (click)="login()">
+      Login
+    </button>
+  </mat-card-actions>
+</mat-card>

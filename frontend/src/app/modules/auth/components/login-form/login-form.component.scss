@@ -1,0 +1,27 @@
+mat-card {
+  max-width: 400px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+mat-error {
+  color: red;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+.successful-color-snackbar {
+  background-color: rgb(65, 252, 134);
+}
+
+.error-color-snackbar {
+  background-color: #f44336;
+}

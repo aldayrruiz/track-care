@@ -1,4 +1,13 @@
-import { IsEmail, IsEnum, IsNotEmpty, IsString, IsStrongPassword } from 'class-validator';
+import {
+	IsBoolean,
+	IsEmail,
+	IsEnum,
+	IsMongoId,
+	IsNotEmpty,
+	IsOptional,
+	IsString,
+	IsStrongPassword,
+} from 'class-validator';
 import { UserRole } from './role.dto';
 
 export class CreateUserDto {
@@ -14,6 +23,14 @@ export class CreateUserDto {
 
 	@IsString()
 	refreshToken: string;
+
+	@IsOptional()
+	@IsBoolean()
+	emailReceiver: boolean;
+
+	@IsOptional()
+	@IsMongoId()
+	smartwatch?: string;
 
 	@IsEnum(UserRole)
 	role?: UserRole;

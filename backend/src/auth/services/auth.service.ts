@@ -6,6 +6,7 @@ import { UserDocument } from 'src/users/schemas/user.schema';
 import { UsersService } from 'src/users/users.service';
 
 import { ForbiddenException, Injectable } from '@nestjs/common';
+import { UserRole } from 'src/users/dto/role.dto';
 import { SignInDto } from '../dto/sign-in.dto';
 import { SignUpDto } from '../dto/sign-up.dto';
 import { EmailOrPasswordIncorrect } from '../errors/email-or-pass-incorrect.error';
@@ -33,9 +34,10 @@ export class AuthService {
 			throw new Error('User already exists');
 		}
 
-		// Hash password
-		const hash = await this.hashingService.hash(signUpDto.password);
-		const user = await this.usersService.create({ ...signUpDto, password: hash });
+		if (signUpDto.password) {
+			signUpDto.password = await this.hashingService.hash(signUpDto.password);
+		}
+		const user = await this.usersService.create(signUpDto);
 
 		// Generate JWT tokens
 		const tokens = await this.getTokens(user.id, user.email);
@@ -45,7 +47,7 @@ export class AuthService {
 
 	async signIn(signInDto: SignInDto) {
 		const user = await this.validateUser(signInDto.email, signInDto.password);
-		if (!user) {
+		if (!user || user.role !== UserRole.ADMIN) {
 			throw new EmailOrPasswordIncorrect();
 		}
 		const tokens = await this.getTokens(user.id, user.email);
@@ -131,5 +133,15 @@ export class AuthService {
 		const tokens = await this.getTokens(user.id, user.email);
 		await this.updateRefreshToken(user.id, tokens.refreshToken);
 		return tokens;
+	}
+
+	private createARandomPassword() {
+		const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*';
+		const charactersLength = characters.length;
+		let result = '';
+		for (let i = 0; i < 10; i++) {
+			result += characters.charAt(Math.floor(Math.random() * charactersLength));
+		}
+		return result;
 	}
 }
