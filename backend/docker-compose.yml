@@ -12,7 +12,7 @@ services:
       JWT_REFRESH_SECRET: your_refresh_secret
     ports:
       - 3000:3000
-    command: npm run start:prod
+    command: bash -c "npm run build && npm run start:prod"
 
   mongodb:
     image: mongo
