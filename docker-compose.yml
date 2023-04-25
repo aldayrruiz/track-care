@@ -4,8 +4,9 @@ services:
   nestjs:
     image: node:16.19.1
     working_dir: /app
+    restart: always
     volumes:
-      - .:/app
+      - ./backend:/app
     environment:
       MONGODB_URI: mongodb://mongodb:27017/nestjs
       JWT_ACCESS_SECRET: your_access_secret
@@ -14,8 +15,18 @@ services:
       - 3000:3000
     command: bash -c "npm i && npm run build && npm run start:prod"
 
+  angular:
+    image: node:16.19.1
+    working_dir: /app
+    volumes:
+      - ./frontend:/app
+    ports:
+      - 4200:4200
+    command: bash -c "npm i && npm run build"
+
   mongodb:
     image: mongo
+    restart: always
     ports:
       - 27017:27017
     volumes:
