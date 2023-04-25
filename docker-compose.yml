@@ -12,7 +12,7 @@ services:
       JWT_ACCESS_SECRET: your_access_secret
       JWT_REFRESH_SECRET: your_refresh_secret
     ports:
-      - 3000:3000
+      - 3001:3000
     command: bash -c "npm i && npm run build && npm run start:prod"
 
   angular:
@@ -20,8 +20,6 @@ services:
     working_dir: /app
     volumes:
       - ./frontend:/app
-    ports:
-      - 4200:4200
     command: bash -c "npm i && npm run build"
 
   mongodb:
@@ -34,3 +32,4 @@ services:
 
 volumes:
   mongodb_data:
+ 
