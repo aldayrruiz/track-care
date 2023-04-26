@@ -70,6 +70,8 @@ export class CreateUserComponent {
   private getFormData(): CreateUser {
     const email = this.email?.value;
     const name = this.name?.value;
+    // this.smartwatch.value have a value, return it in {} else do not include it in {}
+
     const smartwatch = this.smartwatch?.value;
     return { email, name, smartwatch };
   }

@@ -25,7 +25,13 @@ export class User {
 	@Prop({ default: false })
 	emailReceiver: boolean;
 
-	@Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Smartwatch', unique: false, required: false })
+	@Prop({
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Smartwatch',
+		unique: false,
+		required: false,
+		default: null,
+	})
 	smartwatch: Smartwatch;
 
 	@Prop({ default: new Date().toJSON() })
