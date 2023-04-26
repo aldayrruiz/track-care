@@ -12,7 +12,6 @@ import { AuthService } from './services/auth.service';
 export class AuthController {
 	constructor(private readonly authService: AuthService) {}
 
-	@SkipAuth()
 	@Post('signUp')
 	signUp(@Body() signUpDto: SignUpDto) {
 		return this.authService.signUp(signUpDto);
