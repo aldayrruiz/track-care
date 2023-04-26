@@ -30,7 +30,6 @@ export class User {
 		ref: 'Smartwatch',
 		unique: false,
 		required: false,
-		default: null,
 	})
 	smartwatch: Smartwatch;
 

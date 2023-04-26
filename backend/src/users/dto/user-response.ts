@@ -11,8 +11,11 @@ export class UserResponse {
 	@Exclude()
 	refreshToken: string;
 
-	@Transform((value) => String(value.obj.smartwatch))
-	smartwatch: string;
+	@Transform((value) => {
+		if (value.obj?.smartwatch === null) return null;
+		return String(value.obj?.smartwatch);
+	})
+	smartwatch?: string;
 
 	constructor(partial: Partial<UserResponse>) {
 		Object.assign(this, partial);
