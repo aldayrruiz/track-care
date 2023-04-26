@@ -15,7 +15,6 @@ export class AuthController {
 	@SkipAuth()
 	@Post('signUp')
 	signUp(@Body() signUpDto: SignUpDto) {
-		console.log(signUpDto);
 		return this.authService.signUp(signUpDto);
 	}
 

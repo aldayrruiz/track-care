@@ -19,7 +19,6 @@ export class JwtAccessStrategy extends PassportStrategy(Strategy, 'jwt') {
 	}
 
 	async validate(payload: JwtPayload) {
-		console.log('JWT Access');
 		return payload;
 	}
 }
