@@ -18,7 +18,7 @@ export class AuthInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     const jwt = this.storageService.getJWT();
 
-    if (jwt && jwt.accessToken && !this.isRefreshing) {
+    if (jwt?.accessToken && !this.isRefreshing) {
       req = this.addAuthHeaders(req, jwt.accessToken);
     }
 
@@ -38,30 +38,27 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
-    if (!this.isRefreshing) {
-      this.isRefreshing = true;
+    this.isRefreshing = true;
 
-      const jwt = this.storageService.getJWT();
+    const jwt = this.storageService.getJWT();
+    if (jwt?.refreshToken) {
+      return this.authService.refreshToken().pipe(
+        switchMap((response: JWT) => {
+          this.isRefreshing = false;
+          this.authService.storeImportantVariables(response);
+          request = this.addAuthHeaders(request, response.accessToken);
+          return next.handle(request);
+        }),
+        catchError((error) => {
+          this.isRefreshing = false;
 
-      if (jwt && jwt.refreshToken) {
-        return this.authService.refreshToken().pipe(
-          switchMap((response: JWT) => {
-            this.isRefreshing = false;
-            this.authService.storeImportantVariables(response);
-            request = this.addAuthHeaders(request, response.accessToken);
-            return next.handle(request);
-          }),
-          catchError((error) => {
-            this.isRefreshing = false;
+          if (error.status == '403') {
+            this.authService.logout();
+          }
 
-            if (error.status == '403') {
-              this.authService.logout();
-            }
-
-            return throwError(() => error);
-          })
-        );
-      }
+          return throwError(() => error);
+        })
+      );
     }
 
     return next.handle(request);

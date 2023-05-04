@@ -31,9 +31,10 @@ export class AuthController {
 	@SkipAuth()
 	@UseGuards(JwtRefreshGuard)
 	@Get('refresh')
-	refreshTokens(@Req() req: Request) {
+	async refreshTokens(@Req() req: Request) {
 		const userId = req.user['sub'];
 		const refreshToken = req.user['refreshToken'];
-		return this.authService.refreshTokens(userId, refreshToken);
+		const response = await this.authService.refreshTokens(userId, refreshToken);
+		return response;
 	}
 }

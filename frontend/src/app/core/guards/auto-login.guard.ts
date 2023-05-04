@@ -7,10 +7,10 @@ import { StorageService } from '@core/services/storage.service';
 export class AutoLoginGuard implements CanLoad {
   constructor(private storageService: StorageService, private routerService: RouterService) {}
 
-  canLoad() {
+  async canLoad() {
     const jwt = this.storageService.getJWT();
     if (jwt) {
-      this.routerService.goToHome();
+      await this.routerService.goToHome();
       return false;
     } else {
       return true;

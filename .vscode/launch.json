@@ -1,0 +1,19 @@
+// Launch configuration for VS Code to Nestjs application
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "attach",
+            "name": "Attach to Nestjs",
+            "port": 9229,
+            "restart": true,
+            "sourceMaps": true,
+            "outFiles": [
+                "${workspaceRoot}/dist/**/*.js"
+            ],
+            "localRoot": "${workspaceRoot}",
+            "remoteRoot": "${workspaceRoot}"
+        }
+    ]
+}
