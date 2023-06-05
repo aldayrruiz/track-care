@@ -8,7 +8,7 @@ services:
     volumes:
       - ./backend:/app
     environment:
-      MONGODB_URI: mongodb://mongodb:27017/track-care
+      MONGODB_URI: mongodb://mongodb:27017/nestjs
       JWT_ACCESS_SECRET: your_access_secret
       JWT_REFRESH_SECRET: your_refresh_secret
       MAIL_HOST: your_smpt_host
