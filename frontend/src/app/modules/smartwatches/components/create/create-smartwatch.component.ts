@@ -24,8 +24,8 @@ export class CreateSmartwatchComponent {
     this.initFormGroup();
   }
 
-  get MAC() {
-    return this.formGroup.get('MAC');
+  get androidId() {
+    return this.formGroup.get('androidId');
   }
 
   createSmartwatch(): void {
@@ -47,14 +47,14 @@ export class CreateSmartwatchComponent {
   }
 
   private initFormGroup() {
-    const MACRegex = /^([0-9A-F]{2}[:]){5}([0-9A-F]{2})$/;
+    const androidIdRegex = /^[a-zA-Z0-9]+$/;
     this.formGroup = this.formBuilder.group({
-      MAC: ['', [Validators.required, Validators.pattern(MACRegex)]],
+      androidId: ['', [Validators.required, Validators.pattern(androidIdRegex)]],
     });
   }
 
   private getFormData(): CreateSmartwatch {
-    const MAC = this.MAC?.value;
-    return { MAC };
+    const androidId = this.androidId?.value;
+    return { androidId };
   }
 }

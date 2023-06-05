@@ -50,7 +50,7 @@
                 <mat-select formControlName="smartwatch">
                   <mat-option>Ninguna</mat-option>
                   <mat-option *ngFor="let smartwatch of smartwatches" [value]="smartwatch.id">
-                    {{ smartwatch.MAC }}
+                    {{ smartwatch.androidId }}
                   </mat-option>
                 </mat-select>
               </mat-form-field>

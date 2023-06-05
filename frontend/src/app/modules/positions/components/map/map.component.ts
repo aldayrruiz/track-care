@@ -62,7 +62,7 @@ export class MapComponent {
 
     this.positions = positions;
     this.positions.forEach((position) => {
-      const smartwatch = this.smartwatches.find((smartwatch) => smartwatch.MAC === position.MAC);
+      const smartwatch = this.smartwatches.find((smartwatch) => smartwatch.androidId === position.androidId);
       const user = this.users.find((user) => user.smartwatch === smartwatch?.id);
       const marker = this.addMarker(position);
       this.pointers.push({ user, smartwatch, position, marker });

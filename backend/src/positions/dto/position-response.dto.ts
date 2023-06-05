@@ -6,7 +6,7 @@ export class PositionResponse {
 	@Expose({ name: 'id' })
 	_id: string;
 
-	MAC: string;
+	androidId: string;
 	latitude: number;
 	longitude: number;
 	altitude: number;

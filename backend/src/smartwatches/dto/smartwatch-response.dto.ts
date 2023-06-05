@@ -5,7 +5,7 @@ export class SmartwatchResponse {
 	@Expose({ name: 'id' })
 	_id: string;
 
-	MAC: string;
+	androidId: string;
 
 	constructor(partial: Partial<SmartwatchResponse>) {
 		Object.assign(this, partial);

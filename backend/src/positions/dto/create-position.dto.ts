@@ -1,13 +1,14 @@
 import { ApiHideProperty } from '@nestjs/swagger';
 import { Exclude } from 'class-transformer';
 import {
+	IsAlphanumeric,
 	IsDateString,
 	IsEnum,
 	IsLatitude,
 	IsLongitude,
-	IsMACAddress,
 	IsNotEmpty,
 	IsNumber,
+	IsString,
 } from 'class-validator';
 import { SourcePosition } from './source.dto';
 import { PositionType } from './type.dto';
@@ -17,8 +18,9 @@ export class CreatePositionDto {
 	type: PositionType;
 
 	@IsNotEmpty()
-	@IsMACAddress()
-	MAC: string;
+	@IsString()
+	@IsAlphanumeric()
+	androidId: string;
 
 	@IsNumber()
 	@IsLatitude()

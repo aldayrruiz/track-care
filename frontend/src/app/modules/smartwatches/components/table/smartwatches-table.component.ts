@@ -12,7 +12,7 @@ import { finalize } from 'rxjs/operators';
 
 interface SmartwatchRow {
   id: string;
-  MAC: string;
+  androidId: string;
 }
 
 @Component({
@@ -21,7 +21,7 @@ interface SmartwatchRow {
   styleUrls: ['./smartwatches-table.component.scss'],
 })
 export class SmartwatchesTableComponent extends BaseTableComponent<Smartwatch, SmartwatchRow> {
-  columns = ['MAC', 'delete'];
+  columns = ['androidId', 'delete'];
 
   constructor(
     private snackerService: SnackerService,
@@ -50,7 +50,7 @@ export class SmartwatchesTableComponent extends BaseTableComponent<Smartwatch, S
   preprocessData(data: Smartwatch[]): SmartwatchRow[] {
     return data.map((smartwatch) => ({
       id: smartwatch.id,
-      MAC: smartwatch.MAC,
+      androidId: smartwatch.androidId,
     }));
   }
 
@@ -72,7 +72,7 @@ export class SmartwatchesTableComponent extends BaseTableComponent<Smartwatch, S
       next: async () => {
         const newSmartwatches = this.models.filter((u) => u.id !== smartwatch.id);
         this.initTable(newSmartwatches);
-        this.snackerService.showSuccessful(`El smartwatch ${smartwatch.MAC} ha sido eliminado.`);
+        this.snackerService.showSuccessful(`El smartwatch ${smartwatch.androidId} ha sido eliminado.`);
       },
       error: async (error: HttpErrorResponse) => {
         this.snackerService.showError(error.error.message);
@@ -83,7 +83,7 @@ export class SmartwatchesTableComponent extends BaseTableComponent<Smartwatch, S
   private orderRowsAlphabetically(smartwatches: Smartwatch[]) {
     const smartwatchesOrderedAlphabetically = smartwatches.sort((a, b) =>
       // Then order alphabetically
-      a.MAC.localeCompare(b.MAC)
+      a.androidId.localeCompare(b.androidId)
     );
 
     return smartwatchesOrderedAlphabetically;

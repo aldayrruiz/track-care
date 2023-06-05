@@ -6,7 +6,7 @@ export type SmartwatchDocument = HydratedDocument<Smartwatch>;
 @Schema()
 export class Smartwatch {
 	@Prop({ required: true, unique: true })
-	MAC: string;
+	androidId: string;
 
 	@Prop({ default: new Date().toJSON() })
 	createdAt: Date;

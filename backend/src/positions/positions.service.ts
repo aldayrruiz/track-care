@@ -8,6 +8,7 @@ import { CreatePositionDto } from './dto/create-position.dto';
 import { PositionType } from './dto/type.dto';
 import { UpdatePositionDto } from './dto/update-position.dto';
 import { Position, PositionDocument } from './schemas/position.schema';
+
 @Injectable()
 export class PositionsService {
 	constructor(
@@ -18,9 +19,10 @@ export class PositionsService {
 	) {}
 
 	async create(positionDto: CreatePositionDto): Promise<PositionDocument> {
-		const smartwatch = await this.smartwatchService.findByMAC(positionDto.MAC);
+		const smartwatch = await this.smartwatchService.findByAndroidId(positionDto.androidId);
 		const user = await this.userService.findBySmartwatchId(smartwatch.id);
-
+		console.log(smartwatch);
+		console.log(user);
 		const createdPosition = new this.positionModel({
 			...positionDto,
 			smartwatch: smartwatch.id,
@@ -29,10 +31,10 @@ export class PositionsService {
 
 		// Send emails
 		if (positionDto.type === PositionType.TAKEOFF) {
-			this.mailService.sendTakeOffSmartwatch(smartwatch, user);
+			await this.mailService.sendTakeOffSmartwatch(smartwatch, user);
 		}
 		if (positionDto.type === PositionType.EMERGENCY) {
-			this.mailService.sendEmergencySmartwatch(smartwatch, user);
+			await this.mailService.sendEmergencySmartwatch(smartwatch, user);
 		}
 		return createdPosition.save();
 	}
@@ -61,7 +63,7 @@ export class PositionsService {
 				},
 				{
 					$group: {
-						_id: '$MAC',
+						_id: '$androidId',
 						lastPosition: { $first: '$$ROOT' },
 					},
 				},
@@ -72,5 +74,17 @@ export class PositionsService {
 			.exec();
 
 		return lastPositions;
+	}
+
+	async route(androidId: string, from: string, to: string): Promise<PositionDocument[]> {
+		return await this.positionModel
+			.find({
+				androidId: androidId,
+				deviceTimestamp: {
+					$gte: from,
+					$lte: to,
+				},
+			})
+			.exec();
 	}
 }

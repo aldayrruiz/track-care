@@ -10,14 +10,14 @@
           <tr>
             <td>
               <mat-form-field class="full-width" appearance="fill">
-                <mat-label>Dirección MAC</mat-label>
-                <input type="text" matInput formControlName="MAC" placeholder="30:65:EC:6F:C4:58" />
-                <mat-error *ngIf="MAC?.hasError('required')">
-                  Una dirección MAC es <strong>obligatoria</strong>
+                <mat-label>Dirección Android ID</mat-label>
+                <input type="text" matInput formControlName="androidId" />
+                <mat-error *ngIf="androidId?.hasError('required')">
+                  Una dirección Android ID es <strong>obligatoria</strong>
                 </mat-error>
-                <!-- Mat error for MAC Pattern -->
-                <mat-error *ngIf="MAC?.hasError('pattern')">
-                  La dirección MAC no es válida. Debe tener el formato 00:00:00:00:00:00
+                <!-- Mat error for androidId Pattern -->
+                <mat-error *ngIf="androidId?.hasError('pattern')">
+                  Android ID no es válido. Debe un valor alfanumérico
                 </mat-error>
               </mat-form-field>
             </td>

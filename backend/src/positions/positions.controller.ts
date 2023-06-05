@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { plainToClass } from 'class-transformer';
 import { SkipAuth } from 'src/auth/constants';
@@ -25,6 +25,17 @@ export class PositionsController {
 		const positions = await this.positionsService.lastPositions();
 		const response = positions.map((position) => plainToClass(PositionResponse, position));
 		return response;
+	}
+
+	@SkipAuth()
+	@Get('route/:androidId')
+	async route(
+		@Param('androidId') androidId: string,
+		@Query('from') from: string,
+		@Query('to') to: string
+	) {
+		const positions = await this.positionsService.route(androidId, from, to);
+		return positions.map((position) => plainToClass(PositionResponse, position.toJSON()));
 	}
 
 	@SkipAuth()

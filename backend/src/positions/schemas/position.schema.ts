@@ -12,7 +12,7 @@ export class Position {
 	type: string;
 
 	@Prop({ required: true })
-	MAC: string;
+	androidId: string;
 
 	@Prop({ required: true })
 	latitude: number;

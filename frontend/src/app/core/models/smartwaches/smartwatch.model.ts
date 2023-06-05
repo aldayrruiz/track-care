@@ -1,5 +1,5 @@
 export interface Smartwatch {
   id: string;
-  MAC: string;
+  androidId: string;
   owner: string;
 }

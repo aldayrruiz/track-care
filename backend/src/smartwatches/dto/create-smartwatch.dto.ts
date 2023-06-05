@@ -1,6 +1,7 @@
-import { IsMACAddress } from 'class-validator';
+import { IsAlphanumeric, IsString } from 'class-validator';
 
 export class CreateSmartwatchDto {
-	@IsMACAddress({ no_colons: false })
-	MAC: string;
+	@IsString()
+	@IsAlphanumeric()
+	androidId: string;
 }

@@ -15,7 +15,7 @@ export class MailService {
 			subject: 'Se ha reportado una retirada de pulsera',
 			template: './takeOffSmart',
 			context: {
-				mac: smartwatch.MAC,
+				androidId: smartwatch.androidId,
 				userName: user.name,
 			},
 		});
@@ -28,7 +28,7 @@ export class MailService {
 			subject: 'Se ha reportado una emergencia de pulsera',
 			template: './emergencySmart',
 			context: {
-				mac: smartwatch.MAC,
+				androidId: smartwatch.androidId,
 				userName: user.name,
 			},
 		});

@@ -4,7 +4,7 @@ import { PositionType } from './type.dto';
 export interface Position {
   id: string;
   type: PositionType;
-  MAC: string;
+  androidId: string;
   latitude: number;
   longitude: number;
   altitude: number;
