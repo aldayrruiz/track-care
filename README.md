@@ -59,7 +59,7 @@ Esto lanzará el frontend, backend y la base de datos simultáneamente.
 
 Accede a la aplicación en tu navegador web:
 ```bash
-http://localhost:3001
+http://localhost:4200
 ```
 
 ## Documentación Swagger
