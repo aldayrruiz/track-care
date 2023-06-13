@@ -64,8 +64,8 @@ http://localhost:4200
 
 ## Documentación Swagger
 
-El proyecto contiene una documentación completa de la API en formato Swagger. Puedes acceder a ella a través de la siguiente URL:
+El proyecto contiene una documentación completa de la API en formato Swagger. Puedes acceder a ella en localhost a través de la siguiente URL:
 
-- [Documentación Swagger](http://localhost:3001/api/docs)
+- [Documentación Swagger](http://localhost:3000/api/docs)
 
 La documentación Swagger proporciona una descripción detallada de los endpoints disponibles, los parámetros requeridos y las respuestas esperadas. Es una herramienta útil para comprender y utilizar la API de forma eficiente.
