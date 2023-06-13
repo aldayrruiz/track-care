@@ -16,8 +16,8 @@ Este repositorio contiene el código fuente de un proyecto de aplicación web ad
 
 ## Requisitos del sistema
 
-- Node.js (versión X.X.X)
-- Angular CLI (versión X.X.X)
+- Node.js (versión lts-gallium)
+- Angular CLI (versión 15.2.2)
 - Docker
 
 ## Instalación
